@@ -115,3 +115,45 @@ def main () :
 main()
 
 ```
+
+---
+layout: cover
+---
+
+# Chapter 2: Drawing
+
+---
+
+# Drawing Basics
+
+Your screen is made up of a bunch of little lights called pixels
+
+<img src="https://www.orientdisplay.com/wp-content/uploads/2021/01/1-5.png" width="200"/>
+
+As you can see, each little box of color you see on your screen is made from blending red, green, and blue light
+
+---
+
+# Screen Coordinates
+
+
+- In order to draw an image or a shape, you need to tell the computer which pixels to fill in. In order to do that, you need to be able to give them each a unique name.
+- Since they are ordered in rows and columns, can give each pixel a "x" coordinate and a "y" coordinate.
+
+<img src="https://pbaumgarten.com/pygame/img/pygame-coordinate-system.png"/>
+
+---
+
+# Colors
+
+- You can make any color by combining different shades of Red, Green, and Blue. This is how LCD screens work.
+- In order to represent different shades of Red, Green, and Blue (RGB), we use numbers from 0-255.
+
+[Color Picker](https://g.co/kgs/9Motck)
+[Color Game](https://primozz.github.io/colorgame/)
+
+---
+
+# Drawing
+
+[Draw Functions in Pygame](https://www.pygame.org/docs/ref/draw.html)
