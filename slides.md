@@ -157,3 +157,9 @@ As you can see, each little box of color you see on your screen is made from ble
 # Drawing
 
 [Draw Functions in Pygame](https://www.pygame.org/docs/ref/draw.html)
+
+---
+
+# Contact Me
+
+Contact me at aidenl@codingacademystl.org
