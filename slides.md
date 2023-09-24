@@ -276,6 +276,86 @@ for event in pygame.event.get() :
 - `pygame.mouse.get_pos()` simply returns a tuple with the x and y coordinates of the mouse
 
 ---
+layout: cover
+---
+# Chapter 4: Object Oriented Programming
+---
+
+# Object Oriented Programming
+
+Object Oriented Programming gives us a way to represent things, or objects, in our world and keep all of their data in one place.
+
+For example, if we wanted to represent a paddle in, say, pong, without OOP, we would declare its data like
+```python
+paddlePos = [0, 0]
+paddleColor = (255, 0, 0)
+paddleSize = (100, 25)
+```
+and its functions like
+
+```python
+def setPaddlePos(newPos):
+    paddlePos = newPos
+```
+
+This gets very unorganized very quickly. All of these variables and functions are scattered across the code, and what if we want to create multiple paddles? There are two paddles in Pong, of course.
+
+---
+
+# Object Oriented Programming
+
+With OOP, we can simplify this. The data and functions above become
+
+```python
+class Paddle:
+    def __init__(self, dim, pos, color):
+        self.dim = dim
+        self.pos = pos
+        self.color = color
+    def set_pos(self, pos):
+        self.pos = pos
+
+...
+
+paddle1 = Paddle((100, 50), (0, 0), (255, 0, 0))
+paddle2 = Paddle([100, 50], (100 0), (255, 0, 0))
+
+paddle1.set_pos([10, 10])
+```
+
+You may not understand the code above right now, but the point is that OOP condenses your code and helps you stay organized
+
+---
+
+# Object Oriented Programming
+
+Here's a quick W3 schools tutorial on OOP: https://www.w3schools.com/python/python_classes.asp
+
+---
+
+# Object Oriented Programming Homework
+
+- Create a class called Paddle
+- Give it these variables:
+    - position
+    - dimensions
+    - color
+- Give it these functions:
+    - draw()
+        - This function should draw the paddle on the screen
+    - update()
+        - This function should check for keyboard input and move the paddle left and right using the arrow keys or `a` and `d`
+        - This function should also ensure that the paddle doesn't go outside of the screen
+
+---
+
+# Helpful Hints
+
+- When writing the `update()` function, in order to make sure the paddle isn't out of bounds
+    - Check if the x coordinate is < 0. If so, set the X coordinate to 0
+    - Check if the x coordinate minus the width of the paddle is greater than the window width. If it is, it means the paddle is out of bounds and the x coordinate should be set to the window width minus the paddle width
+
+---
 
 # Contact Me
 
