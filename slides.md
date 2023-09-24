@@ -119,7 +119,6 @@ main()
 ---
 layout: cover
 ---
-
 # Chapter 2: Drawing
 
 ---
@@ -157,6 +156,124 @@ As you can see, each little box of color you see on your screen is made from ble
 # Drawing
 
 [Draw Functions in Pygame](https://www.pygame.org/docs/ref/draw.html)
+
+---
+layout: cover
+---
+# Chapter 3: Input
+
+Input is a large part of GameDev. Is a game really a game if you can't interact with it?
+
+---
+
+# Input Basics
+
+Take this bit of code
+
+```python
+    # Get inputs
+    for event in pygame.event.get() :
+      if event.type == QUIT :
+        pygame.quit()
+        sys.exit()
+```
+
+What is it doing?
+
+---
+
+# Input Basics
+
+When you run your loop, pygame accumulates a list of inputs recieved by the system
+
+These inputs can include
+- Window Events (Close, Minimize)
+- Keyboard Events (Key pressed down, Key released)
+- Mouse Events (Mouse position, Mouse button pressed, Mouse button released)
+
+---
+
+# Input Basics
+
+```python
+for event in pygame.event.get() :
+```
+
+- This loops through all of the events python has recieved from the system
+- `pygame.event.get()` returns an array of all of the events
+- `event` is the current event in the loop
+
+---
+
+# Input Basics
+
+- The `event` variable has the type `Event`. You can find the definition for that [here](https://www.pygame.org/docs/ref/event.html#pygame.event.Event)
+- The `Event` type has a member variable called `type` which is an integer and represents the type of event
+- Pygame provides us with some constants that contain the number for their respective events. Some event types include `QUIT`, `MOUSEDOWN`, `MOUSEUP`, `KEYDOWN`, `KEYUP`
+- So, for example, if we want to check if an event is a quit event, we use the code 
+```python
+if event.type == QUIT:
+    # Do the things you want to do when you recieve the QUIT event
+```
+
+---
+
+# Keyboard Events
+
+- Checking for key events is simple
+- When a key is pressed down, pygame receieves a KEYDOWN event and when a key is released, it recieves a KEYUP event
+- A keyboard event has a member called key which contains the key that was pressed
+
+- This code checks if the `a` key was pressed
+```python
+    for event in pygame.event.get() :
+      if event.type == QUIT:
+        pygame.quit()
+        sys.exit()
+      if even.type == KEYDOWN:
+        if event.key == K_a:
+          print("key \"a\" was pressed")
+```
+
+- You can find a list of keys [here](https://www.pygame.org/docs/ref/key.html) if you scroll down
+
+---
+
+# Keyboard Events
+
+- This way of checking for keyboard events is annoying though, because you can only check for key presses in a single spot.
+- Luckily, pygame provides a function where you can get the state of a key anywhere in your code
+
+```python
+if pygame.key.get_pressed()[K_a]:
+  print("key \"a\" was pressed")
+
+# Does the exact same thing as
+for event in pygame.event.get() :
+  if even.type == KEYDOWN:
+    if event.key == K_a:
+      print("key \"a\" was pressed")
+
+# But you can do it anywhere in the code
+```
+
+- The function `pygame.key.get_pressed()` returns an array of booleans that represent the up or down state of the keys on the keyboard. You can access the array using the key constants provided by python
+- For example, `pygame.key.get_pressed()[K_a]` returns true if the `a` key is pressed
+
+---
+
+# Mouse Events
+
+- You could check for mouse events in the event for loop, but we've found that there are easier ways to do this.
+- Similar to the `pygame.keyboard.get_pressed` function, there is a `pygame.mouse.get_pressed` function. This doesn't return an array, however. Rather, it returns a tuple with three values. Index 0 in the tuple represents the state of the left mouse button, the second represents the state of the right mouse button, and the third represents the state of the middle mouse.
+- You can find the definition for the function [here](https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pressed)
+
+---
+
+# Mouse Events
+
+- It is also useful to determine the location of the mouse. The function for this is simple.
+- `pygame.mouse.get_pos()` simply returns a tuple with the x and y coordinates of the mouse
 
 ---
 
