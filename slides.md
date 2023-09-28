@@ -117,6 +117,12 @@ main()
 ```
 
 ---
+
+# Code
+
+You can find the code at https://github.com/Coding-Academy-STL/GameDevWithPython/tree/main/code/chapter_1
+
+---
 layout: cover
 ---
 # Chapter 2: Drawing
@@ -156,6 +162,12 @@ As you can see, each little box of color you see on your screen is made from ble
 # Drawing
 
 [Draw Functions in Pygame](https://www.pygame.org/docs/ref/draw.html)
+
+---
+
+# Code
+
+You can find the code at https://github.com/Coding-Academy-STL/GameDevWithPython/tree/main/code/chapter_2
 
 ---
 layout: cover
@@ -267,6 +279,13 @@ for event in pygame.event.get() :
 - You could check for mouse events in the event for loop, but we've found that there are easier ways to do this.
 - Similar to the `pygame.keyboard.get_pressed` function, there is a `pygame.mouse.get_pressed` function. This doesn't return an array, however. Rather, it returns a tuple with three values. Index 0 in the tuple represents the state of the left mouse button, the second represents the state of the right mouse button, and the third represents the state of the middle mouse.
 - You can find the definition for the function [here](https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pressed)
+
+---
+
+
+# Code
+
+You can find the code at https://github.com/Coding-Academy-STL/GameDevWithPython/tree/main/code/chapter_3
 
 ---
 
