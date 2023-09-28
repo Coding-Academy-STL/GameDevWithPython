@@ -1,11 +1,5 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Game Dev in Python
 
-To start the slide show:
+This is the source code for the Game Dev in Python slides.
 
-- `yarn install`
-- `yarn run dev`
-- visit http://localhost:3030
-
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev on [documentations](https://sli.dev/).
+The unit code can be found [here](code)
