@@ -375,6 +375,21 @@ Here's a quick W3 schools tutorial on OOP: https://www.w3schools.com/python/pyth
     - Check if the x coordinate minus the width of the paddle is greater than the window width. If it is, it means the paddle is out of bounds and the x coordinate should be set to the window width minus the paddle width
 
 ---
+layout: cover
+---
+# Chapter 5: Collisions
+---
+
+# Overview
+
+Video games are simulations of reality. Reality is determined by the laws of physics. What good is a game without physics?
+
+# Pong Notes
+
+- If we play the game pong, we can see that the ball bounces off the walls at the same angle that they intercept them
+- Also, the angle that the ball bounces off of the paddle is determined by the place that the ball hits the paddle. If it hits the paddle in the middle, it goes straight forward. If it hits the corners, it goes off to the side at a sharp angle.
+
+---
 
 # Contact Me
 

@@ -1,9 +1,6 @@
 import pygame, sys, random
 from pygame.locals import *
 
-
-
-
 pygame.init()
  
 # Background color (R, G, B)
