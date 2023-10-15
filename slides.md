@@ -381,6 +381,10 @@ Here's a quick W3 schools tutorial on OOP: https://www.w3schools.com/python/pyth
     - Check if the x coordinate minus the width of the paddle is greater than the window width. If it is, it means the paddle is out of bounds and the x coordinate should be set to the window width minus the paddle width
 
 ---
+# Answers
+https://github.com/Coding-Academy-STL/GameDevWithPython/blob/main/code/chapter_4/paddle.py
+
+---
 layout: cover
 ---
 # Chapter 5: Collisions
