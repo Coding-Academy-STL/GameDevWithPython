@@ -384,10 +384,18 @@ layout: cover
 
 Video games are simulations of reality. Reality is determined by the laws of physics. What good is a game without physics?
 
+---
+
 # Pong Notes
 
 - If we play the game pong, we can see that the ball bounces off the walls at the same angle that they intercept them
 - Also, the angle that the ball bounces off of the paddle is determined by the place that the ball hits the paddle. If it hits the paddle in the middle, it goes straight forward. If it hits the corners, it goes off to the side at a sharp angle.
+
+---
+
+# Collisions Implementation
+
+https://github.com/Coding-Academy-STL/GameDevWithPython/blob/main/code/chapter_5/bounce.py
 
 ---
 
