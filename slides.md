@@ -382,9 +382,18 @@ Here's a quick W3 schools tutorial on OOP: https://www.w3schools.com/python/pyth
 
 ---
 
+# Object Oriented Programming Homework: Ball
+- Create a class called "Ball"
+- This ball should have a position, velocity, color, and radius
+- The class should have an update function that moves the ball using the velocity and bounces the ball off of the walls
+- The class should have a draw function that draws the ball at its current position, with its radius and its color
+
+---
+
 # Answers
 
 https://github.com/Coding-Academy-STL/GameDevWithPython/blob/main/code/chapter_4/paddle.py
+https://github.com/Coding-Academy-STL/GameDevWithPython/blob/main/code/chapter_4/ball.py
 
 ---
 layout: cover
