@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>diff</title>
+<meta name="Generator" content="Vim/8.2">
+<meta name="plugin-version" content="vim8.1_v2">
+<meta name="settings" content="whole_filler,use_css,no_foldcolumn,expand_tabs,prevent_copy=,use_input_for_pc=fallback">
+<meta name="colorscheme" content="none">
+<style>
+<!--
+pre { font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.PreProc { color: #ff40ff; }
+.Comment { color: #8080ff; }
+.Constant { color: #ff6060; }
+.Folded { color: #8080ff; background-color: #ffffff; padding-bottom: 1px; }
+.Identifier { color: #00ffff; }
+.Statement { color: #ffff00; }
+.DiffChange { background-color: #ff40ff; padding-bottom: 1px; }
+.DiffDelete { color: #8080ff; background-color: #00ffff; padding-bottom: 1px; font-weight: bold; }
+.DiffText { background-color: #ff6060; padding-bottom: 1px; font-weight: bold; }
+.DiffAdd { background-color: #8080ff; padding-bottom: 1px; }
+-->
+<!--
+table { table-layout: fixed; }
+html, body, table, tbody { width: 100%; margin: 0; padding: 0; }
+table, td, th { border: 1px solid; }
+td { vertical-align: top; }
+th, td { width: 50.0%; }
+td div { overflow: auto; }
+-->
+</style>
+</head>
+<body>
+<table id='vimCodeElement'>
+<tr>
+<th>bounce.py</th>
+<th>bounce_2.py</th>
+</tr><tr>
+<td><div>
+<pre>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="PreProc">import</span> pygame, sys, random
+<span class="PreProc">import</span> math
+<span class="PreProc">from</span> pygame.locals <span class="PreProc">import</span> *
+
+pygame.init()
+
+<span class="Folded">+--  2 lines: Background color (R, G, B)--------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="Comment"># Game Setup</span>
+FPS = <span class="Constant">60</span>
+fpsClock = pygame.time.Clock()
+WINDOW_WIDTH = <span class="Constant">400</span>
+WINDOW_HEIGHT = <span class="Constant">300</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+WINDOW = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption(<span class="Constant">'</span><span class="Constant">My Game!</span><span class="Constant">'</span>)
+
+<span class="Statement">class</span> <span class="Identifier">Paddle</span>:
+    <span class="Statement">def</span> <span class="Identifier">__init__</span>(self, pos, dimensions, color, speed, leftKey, rightKey):
+<span class="Folded">+-- 57 lines: self.pos = pos                    An array [x, y]---------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="Comment"># p1: [x, y]</span>
+<span class="Comment"># p2: [x, y]</span>
+<span class="Comment"># return: distance</span>
+<span class="Statement">def</span> <span class="Identifier">distance</span>(p1, p2):
+    <span class="Statement">return</span> math.sqrt((p1[<span class="Constant">0</span>] - p2[<span class="Constant">0</span>]) ** <span class="Constant">2</span> + (p1[<span class="Constant">1</span>] - p2[<span class="Constant">1</span>]) ** <span class="Constant">2</span>)
+
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="Comment"># Check if a ball and paddle are colliding</span>
+<span class="Comment"># return True if they collide</span>
+<span class="Statement DiffChange">def</span><span class="DiffChange"> </span><span class="Identifier DiffChange">ball_paddle_collision</span><span class="DiffChange">(ball: Ball, paddle: Paddle):                                                                                                                                                            </span>
+    <span class="Comment"># Let's make this simple:</span>
+    <span class="Comment">#    - Treat the paddle as a line</span>
+
+    <span class="Comment"># First, check if the ball is within the x bounds of the paddle</span>
+    <span class="Statement">if</span> ball.pos[<span class="Constant">0</span>] + ball.radius &lt; paddle.pos[<span class="Constant">0</span>] <span class="Statement">or</span> ball.pos[<span class="Constant">0</span>] - ball.radius &gt; paddle.pos[<span class="Constant">0</span>] + paddle.dimensions[<span class="Constant">0</span>]:
+        <span class="Comment"># The ball is outside of the x bounds</span>
+<span class="Folded">+--  4 lines: return False----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+    distance_right = distance(ball.pos, [paddle.pos[<span class="Constant">0</span>] + paddle.dimensions[<span class="Constant">0</span>], paddle.pos[<span class="Constant">1</span>]])
+
+    <span class="Comment"># If the distances are less than the radius of the ball, there is a collision</span>
+    <span class="Statement">if</span> distance_left &lt; ball.radius <span class="Statement">or</span> distance_right &lt; ball.radius:
+        <span class="Statement">return</span> <span class="Identifier">True</span>
+
+<span class="DiffChange">    </span><span class="Comment DiffText"># Check if the Y value of the ball matches a collision</span><span class="DiffChange">                                                                                                                                                        </span>
+<span class="DiffChange">    </span><span class="Statement DiffText">if</span><span class="DiffText"> ball.pos[</span><span class="Constant DiffText">1</span><span class="DiffText">] + ball.radius &gt; paddle.pos[</span><span class="Constant DiffText">1</span><span class="DiffText">]:</span><span class="DiffChange">                                                                                                                                                                 </span>
+<span class="DiffChange">        </span><span class="Statement DiffText">return</span><span class="DiffText"> </span><span class="Identifier DiffText">True</span><span class="DiffChange">                                                                                                                                                                                               </span>
+<span class="DiffChange"> </span><span class="DiffChange">                                                                                                                                                                                                                 </span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+    <span class="Statement">return</span> <span class="Identifier">False</span>
+
+<span class="Comment"># Clamp a value within a range</span>
+<span class="Comment"># For example, if your range is -1.0 &lt; x &lt; 1.0</span>
+<span class="Comment"># and x is -1.2, x will be clamped to -1.0</span>
+<span class="Folded">+--  2 lines: If x is 1.2, x will be clamped to 1.0---------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="Statement">def</span> <span class="Identifier">clamp</span>(value, lower, upper):
+    <span class="Statement">return</span> lower <span class="Statement">if</span> value &lt; lower <span class="Statement">else</span> upper <span class="Statement">if</span> value &gt; upper <span class="Statement">else</span> value
+
+
+<span class="Comment"># The main function that controls the game</span>
+<span class="Statement">def</span> <span class="Identifier">main</span> () :
+<span class="DiffChange">  paddle</span><span class="DiffText"> = Paddle([</span><span class="Constant DiffText">100</span><span class="DiffText">, </span><span class="Constant DiffText">250</span><span class="DiffChange">], [</span><span class="Constant DiffChange">100</span><span class="DiffChange">, </span><span class="Constant DiffChange">15</span><span class="DiffChange">], [</span><span class="Constant DiffChange">255</span><span class="DiffChange">, </span><span class="Constant DiffChange">0</span><span class="DiffChange">, </span><span class="Constant DiffChange">0</span><span class="DiffChange">], </span><span class="Constant DiffChange">10</span><span class="DiffChange">, K_a, K_d)                                                                                                                                               </span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+  ball = Ball([<span class="Constant">100</span>, <span class="Constant">100</span>], <span class="Constant">10</span>, [<span class="Constant">255</span>, <span class="Constant">0</span>, <span class="Constant">0</span>], [<span class="Constant">2.5</span>, <span class="Constant">3</span>])
+
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+  MAX_ANGLE = math.radians(<span class="Constant">50</span>)
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+  <span class="Comment"># The main game loop</span>
+  <span class="Statement">while</span> <span class="Identifier">True</span>:
+    <span class="Comment"># Get inputs</span>
+    <span class="Statement">for</span> event <span class="Statement">in</span> pygame.event.get() :
+      <span class="Statement">if</span> event.type == QUIT :
+        pygame.quit()
+        sys.exit()
+
+
+    <span class="Comment"># Render (Draw) elements of the game</span>
+    WINDOW.fill(BACKGROUND)
+
+<span class="DiffChange">    paddle.update()</span><span class="DiffChange">                                                                                                                                                                                               </span>
+<span class="DiffChange">    paddle.draw()</span><span class="DiffChange">                                                                                                                                                                                                 </span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+    ball.update()
+    ball.draw()
+
+<span class="DiffChange">    </span><span class="Statement DiffChange">if</span><span class="DiffChange"> ball_paddle_collision(ball, paddle):                                                                                                                                                                       </span>
+<span class="DiffChange">        </span><span class="DiffText">ball.pos = [ball.pos[</span><span class="Constant DiffText">0</span><span class="DiffText">], paddle.pos[</span><span class="Constant DiffText">1</span><span class="DiffText">] - ball.radius]</span><span class="DiffChange">                                                                                                                                                     </span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <span class="Comment"># This is a simple collision resolution</span>
+        <span class="Comment"># ball.velocity[1] *= -1</span>
+
+        <span class="Comment"># But let's do some accurate Pong collision handling</span>
+<span class="DiffChange">        x_distance_from_paddle_center = ball.pos[</span><span class="Constant DiffChange">0</span><span class="DiffChange">] - (paddle</span><span class="DiffText">.pos[</span><span class="Constant DiffText">0</span><span class="DiffText">] + paddle</span><span class="DiffChange">.dimensions[</span><span class="Constant DiffChange">0</span><span class="DiffChange">] / </span><span class="Constant DiffChange">2.0</span><span class="DiffChange">)                                                                                                                </span>
+
+        <span class="Comment"># Get a decimal percentage betwen -1.0 and 1.0 of how far from the center the ball is</span>
+<span class="DiffChange">        x_percentage = x_distance_from_paddle_center / (paddle.dimensions[</span><span class="Constant DiffChange">0</span><span class="DiffChange">] / </span><span class="Constant DiffChange">2.0</span><span class="DiffChange">)                                                                                                                               </span>
+        x_percentage = clamp(x_percentage, -<span class="Constant">1.0</span>, <span class="Constant">1.0</span>)
+
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+        new_ball_speed = ball.get_speed() + <span class="Constant">.2</span>
+
+<span class="DiffChange">        ball.velocity = [new_ball_speed * math.sin(MAX_ANGLE * x_percentage), </span><span class="DiffText">-</span><span class="Constant DiffText">1</span><span class="DiffText"> * </span><span class="DiffChange">new_ball_speed * math.cos(MAX_ANGLE * x_percentage)]                                                                           </span>
+<span class="DiffDelete">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+    <span class="Comment"># Update the display!</span>
+    pygame.display.update()
+
+    <span class="Comment"># Update the clock limit framerate to FPS</span>
+    fpsClock.tick(FPS)
+<span class="Folded">+--  2 lines: main()----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+<td><div>
+<pre>
+<span class="PreProc DiffAdd">from</span><span class="DiffAdd"> enum </span><span class="PreProc DiffAdd">import</span><span class="DiffAdd"> Enum                                                                                                                                                                                             </span>
+<span class="PreProc">import</span> pygame, sys, random
+<span class="PreProc">import</span> math
+<span class="PreProc">from</span> pygame.locals <span class="PreProc">import</span> *
+
+pygame.init()
+
+<span class="Folded">+--  2 lines: Background color (R, G, B)--------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="Comment"># Game Setup</span>
+FPS = <span class="Constant">60</span>
+fpsClock = pygame.time.Clock()
+WINDOW_WIDTH = <span class="Constant">400</span>
+WINDOW_HEIGHT = <span class="Constant">300</span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">PADDLE_TO_SCREEN_DISTANCE = </span><span class="Constant DiffAdd">20</span><span class="DiffAdd"> </span><span class="Comment DiffAdd"># Distance from the edge of the paddles to the closest vertical edge of the screen</span><span class="DiffAdd">                                                                                                 </span>
+
+WINDOW = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption(<span class="Constant">'</span><span class="Constant">My Game!</span><span class="Constant">'</span>)
+
+<span class="Statement">class</span> <span class="Identifier">Paddle</span>:
+    <span class="Statement">def</span> <span class="Identifier">__init__</span>(self, pos, dimensions, color, speed, leftKey, rightKey):
+<span class="Folded">+-- 57 lines: self.pos = pos                    An array [x, y]---------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="Comment"># p1: [x, y]</span>
+<span class="Comment"># p2: [x, y]</span>
+<span class="Comment"># return: distance</span>
+<span class="Statement">def</span> <span class="Identifier">distance</span>(p1, p2):
+    <span class="Statement">return</span> math.sqrt((p1[<span class="Constant">0</span>] - p2[<span class="Constant">0</span>]) ** <span class="Constant">2</span> + (p1[<span class="Constant">1</span>] - p2[<span class="Constant">1</span>]) ** <span class="Constant">2</span>)
+
+<span class="DiffAdd">PADDLE_TOP = </span><span class="Constant DiffAdd">0</span><span class="DiffAdd">                                                                                                                                                                                                    </span>
+<span class="DiffAdd">PADDLE_BOTTOM = </span><span class="Constant DiffAdd">1</span><span class="DiffAdd">                                                                                                                                                                                                 </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="Comment"># Check if a ball and paddle are colliding</span>
+<span class="Comment"># return True if they collide</span>
+<span class="Statement DiffChange">def</span><span class="DiffChange"> </span><span class="Identifier DiffChange">ball_paddle_collision</span><span class="DiffChange">(ball: Ball, paddle: Paddle</span><span class="DiffText">, which</span><span class="DiffChange">):                                                                                                                                                     </span>
+    <span class="Comment"># Let's make this simple:</span>
+    <span class="Comment">#    - Treat the paddle as a line</span>
+
+    <span class="Comment"># First, check if the ball is within the x bounds of the paddle</span>
+    <span class="Statement">if</span> ball.pos[<span class="Constant">0</span>] + ball.radius &lt; paddle.pos[<span class="Constant">0</span>] <span class="Statement">or</span> ball.pos[<span class="Constant">0</span>] - ball.radius &gt; paddle.pos[<span class="Constant">0</span>] + paddle.dimensions[<span class="Constant">0</span>]:
+        <span class="Comment"># The ball is outside of the x bounds</span>
+<span class="Folded">+--  4 lines: return False----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+    distance_right = distance(ball.pos, [paddle.pos[<span class="Constant">0</span>] + paddle.dimensions[<span class="Constant">0</span>], paddle.pos[<span class="Constant">1</span>]])
+
+    <span class="Comment"># If the distances are less than the radius of the ball, there is a collision</span>
+    <span class="Statement">if</span> distance_left &lt; ball.radius <span class="Statement">or</span> distance_right &lt; ball.radius:
+        <span class="Statement">return</span> <span class="Identifier">True</span>
+
+<span class="DiffChange">    </span><span class="Statement DiffText">if</span><span class="DiffText"> which == PADDLE_BOTTOM:</span><span class="DiffChange">                                                                                                                                                                                    </span>
+<span class="DiffChange">    </span><span class="DiffText">    </span><span class="Comment DiffText"># Check if the Y value of the ball matches a collision</span><span class="DiffChange">                                                                                                                                                    </span>
+<span class="DiffChange">        </span><span class="Statement DiffText">if</span><span class="DiffText"> ball.pos[</span><span class="Constant DiffText">1</span><span class="DiffText">] + ball.radius &gt; paddle.pos[</span><span class="Constant DiffText">1</span><span class="DiffText">]:</span><span class="DiffChange">                                                                                                                                                             </span>
+<span class="DiffText">            </span><span class="Statement DiffText">return</span><span class="DiffText"> </span><span class="Identifier DiffText">True</span><span class="DiffChange">                                                                                                                                                                                           </span>
+<span class="DiffAdd">    </span><span class="Statement DiffAdd">elif</span><span class="DiffAdd"> which == PADDLE_TOP:                                                                                                                                                                                     </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># Check if the Y value of the ball matches a collision</span><span class="DiffAdd">                                                                                                                                                    </span>
+<span class="DiffAdd">        </span><span class="Statement DiffAdd">if</span><span class="DiffAdd"> ball.pos[</span><span class="Constant DiffAdd">1</span><span class="DiffAdd">] - ball.radius &lt; paddle.pos[</span><span class="Constant DiffAdd">1</span><span class="DiffAdd">] + paddle.dimensions[</span><span class="Constant DiffAdd">1</span><span class="DiffAdd">]:                                                                                                                                      </span>
+<span class="DiffAdd">            </span><span class="Statement DiffAdd">return</span><span class="DiffAdd"> </span><span class="Identifier DiffAdd">True</span><span class="DiffAdd">                                                                                                                                                                                           </span>
+
+    <span class="Statement">return</span> <span class="Identifier">False</span>
+
+<span class="Comment"># Clamp a value within a range</span>
+<span class="Comment"># For example, if your range is -1.0 &lt; x &lt; 1.0</span>
+<span class="Comment"># and x is -1.2, x will be clamped to -1.0</span>
+<span class="Folded">+--  2 lines: If x is 1.2, x will be clamped to 1.0---------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="Statement">def</span> <span class="Identifier">clamp</span>(value, lower, upper):
+    <span class="Statement">return</span> lower <span class="Statement">if</span> value &lt; lower <span class="Statement">else</span> upper <span class="Statement">if</span> value &gt; upper <span class="Statement">else</span> value
+
+
+<span class="Comment"># The main function that controls the game</span>
+<span class="Statement">def</span> <span class="Identifier">main</span> () :
+<span class="DiffChange">  paddle</span><span class="DiffText">Bottom = Paddle([</span><span class="Constant DiffText">100</span><span class="DiffText">, WINDOW_HEIGHT - PADDLE_TO_SCREEN_DISTANCE - </span><span class="Constant DiffText">15</span><span class="DiffChange">], [</span><span class="Constant DiffChange">100</span><span class="DiffChange">, </span><span class="Constant DiffChange">15</span><span class="DiffChange">], [</span><span class="Constant DiffChange">255</span><span class="DiffChange">, </span><span class="Constant DiffChange">0</span><span class="DiffChange">, </span><span class="Constant DiffChange">0</span><span class="DiffChange">], </span><span class="Constant DiffChange">10</span><span class="DiffChange">, K_a, K_d)                                                                                              </span>
+<span class="DiffAdd">  paddleTop = Paddle([</span><span class="Constant DiffAdd">100</span><span class="DiffAdd">, PADDLE_TO_SCREEN_DISTANCE], [</span><span class="Constant DiffAdd">100</span><span class="DiffAdd">, </span><span class="Constant DiffAdd">15</span><span class="DiffAdd">], [</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">, </span><span class="Constant DiffAdd">0</span><span class="DiffAdd">, </span><span class="Constant DiffAdd">255</span><span class="DiffAdd">], </span><span class="Constant DiffAdd">10</span><span class="DiffAdd">, K_LEFT, K_RIGHT)                                                                                                               </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+  ball = Ball([<span class="Constant">100</span>, <span class="Constant">100</span>], <span class="Constant">10</span>, [<span class="Constant">255</span>, <span class="Constant">0</span>, <span class="Constant">0</span>], [<span class="Constant">2.5</span>, <span class="Constant">3</span>])
+
+<span class="DiffAdd">  </span><span class="Comment DiffAdd"># The maximum angle the ball can bounce off the paddle at</span><span class="DiffAdd">                                                                                                                                                       </span>
+  MAX_ANGLE = math.radians(<span class="Constant">50</span>)
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+  <span class="Comment"># The main game loop</span>
+  <span class="Statement">while</span> <span class="Identifier">True</span>:
+    <span class="Comment"># Get inputs</span>
+    <span class="Statement">for</span> event <span class="Statement">in</span> pygame.event.get() :
+      <span class="Statement">if</span> event.type == QUIT :
+        pygame.quit()
+        sys.exit()
+
+
+    <span class="Comment"># Render (Draw) elements of the game</span>
+    WINDOW.fill(BACKGROUND)
+
+<span class="DiffChange">    paddle</span><span class="DiffText">Bottom</span><span class="DiffChange">.update()                                                                                                                                                                                         </span>
+<span class="DiffChange">    paddle</span><span class="DiffText">Bottom</span><span class="DiffChange">.draw()                                                                                                                                                                                           </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">    paddleTop.update()</span><span class="DiffAdd">                                                                                                                                                                                            </span>
+<span class="DiffAdd">    paddleTop.draw()</span><span class="DiffAdd">                                                                                                                                                                                              </span>
+
+    ball.update()
+    ball.draw()
+
+<span class="DiffChange">    </span><span class="Statement DiffChange">if</span><span class="DiffChange"> ball_paddle_collision(ball, paddle</span><span class="DiffText">Bottom, PADDLE_BOTTOM</span><span class="DiffChange">):                                                                                                                                                  </span>
+<span class="DiffChange">        </span><span class="Comment DiffText"># offset the ball such that it isn't colliding with the paddle anymore</span><span class="DiffChange">                                                                                                                                    </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># this is to avoid running collision calculations for the same collision</span><span class="DiffAdd">                                                                                                                                  </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># multiple frames in a row</span><span class="DiffAdd">                                                                                                                                                                                </span>
+<span class="DiffAdd">        ball.pos = [ball.pos[</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">], paddleBottom.pos[</span><span class="Constant DiffAdd">1</span><span class="DiffAdd">] - ball.radius]                                                                                                                                               </span>
+<span class="DiffAdd">        </span><span class="DiffAdd">                                                                                                                                                                                                          </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># This is a simple collision resolution</span><span class="DiffAdd">                                                                                                                                                                   </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># ball.velocity[1] *= -1</span><span class="DiffAdd">                                                                                                                                                                                  </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># But let's do some accurate Pong collision handling</span><span class="DiffAdd">                                                                                                                                                      </span>
+<span class="DiffAdd">        x_distance_from_paddle_center = ball.pos[</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">] - (paddleBottom.pos[</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">] + paddleBottom.dimensions[</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">] / </span><span class="Constant DiffAdd">2.0</span><span class="DiffAdd">)                                                                                                    </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># Get a decimal percentage betwen -1.0 and 1.0 of how far from the center the ball is</span><span class="DiffAdd">                                                                                                                     </span>
+<span class="DiffAdd">        x_percentage = x_distance_from_paddle_center / (paddleBottom.dimensions[</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">] / </span><span class="Constant DiffAdd">2.0</span><span class="DiffAdd">)                                                                                                                         </span>
+<span class="DiffAdd">        x_percentage = clamp(x_percentage, -</span><span class="Constant DiffAdd">1.0</span><span class="DiffAdd">, </span><span class="Constant DiffAdd">1.0</span><span class="DiffAdd">)                                                                                                                                                             </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">        new_ball_speed = ball.get_speed() + </span><span class="Constant DiffAdd">.2</span><span class="DiffAdd">                                                                                                                                                                    </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># This is just right angle trig to calculate the velocity in the x and y directions given an angle (MAX_ANGLE * x_percentage)</span><span class="DiffAdd">                                                                             </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># and a speed (new_ball_speed). Notice that we multiply by -1 here because we want the ball to go up (which is the negative direction)</span><span class="DiffAdd">                                                                    </span>
+<span class="DiffAdd">        ball.velocity = [new_ball_speed * math.sin(MAX_ANGLE * x_percentage),</span><span class="DiffAdd">                                                                                                                                     </span>
+<span class="DiffAdd">                         -</span><span class="Constant DiffAdd">1</span><span class="DiffAdd"> * new_ball_speed * math.cos(MAX_ANGLE * x_percentage)]                                                                                                                                </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+<span class="DiffAdd">    </span><span class="Statement DiffAdd">elif</span><span class="DiffAdd"> ball_paddle_collision(ball, paddleTop, PADDLE_TOP):                                                                                                                                                      </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># Same thing as the previous if statement, but we need to keep into account that the ball will hit the bottom</span><span class="DiffAdd">                                                                                             </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># edge of the paddle. Since we are offsetting the ball from the top edge, we need to take into account</span><span class="DiffAdd">                                                                                                    </span>
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># the height of the paddle, hence paddleTop.dimensions[1]. Try deleting that addition and notice what happens</span><span class="DiffAdd">                                                                                             </span>
+<span class="DiffAdd">        ball.pos = [ball.pos[</span><span class="Constant DiffAdd">0</span><span class="DiffAdd">], paddleTop.pos[</span><span class="Constant DiffAdd">1</span><span class="DiffAdd">] + paddleTop.dimensions[</span><span class="Constant DiffAdd">1</span><span class="DiffAdd">] + ball.radius]                                                                                                                        </span>
+
+        <span class="Comment"># This is a simple collision resolution</span>
+        <span class="Comment"># ball.velocity[1] *= -1</span>
+
+        <span class="Comment"># But let's do some accurate Pong collision handling</span>
+<span class="DiffChange">        x_distance_from_paddle_center = ball.pos[</span><span class="Constant DiffChange">0</span><span class="DiffChange">] - (paddle</span><span class="DiffText">Top.pos[</span><span class="Constant DiffText">0</span><span class="DiffText">] + paddleTop</span><span class="DiffChange">.dimensions[</span><span class="Constant DiffChange">0</span><span class="DiffChange">] / </span><span class="Constant DiffChange">2.0</span><span class="DiffChange">)                                                                                                          </span>
+
+        <span class="Comment"># Get a decimal percentage betwen -1.0 and 1.0 of how far from the center the ball is</span>
+<span class="DiffChange">        x_percentage = x_distance_from_paddle_center / (paddle</span><span class="DiffText">Top</span><span class="DiffChange">.dimensions[</span><span class="Constant DiffChange">0</span><span class="DiffChange">] / </span><span class="Constant DiffChange">2.0</span><span class="DiffChange">)                                                                                                                            </span>
+        x_percentage = clamp(x_percentage, -<span class="Constant">1.0</span>, <span class="Constant">1.0</span>)
+
+<span class="DiffAdd">        </span><span class="Comment DiffAdd"># Speed the ball up after every collision. This is optional</span><span class="DiffAdd">                                                                                                                                               </span>
+        new_ball_speed = ball.get_speed() + <span class="Constant">.2</span>
+
+<span class="DiffChange">        ball.velocity = [new_ball_speed * math.sin(MAX_ANGLE * x_percentage), new_ball_speed * math.cos(MAX_ANGLE * x_percentage)]</span><span class="DiffChange">                                                                                </span>
+<span class="DiffAdd"> </span><span class="DiffAdd">                                                                                                                                                                                                                 </span>
+
+    <span class="Comment"># Update the display!</span>
+    pygame.display.update()
+
+    <span class="Comment"># Update the clock limit framerate to FPS</span>
+    fpsClock.tick(FPS)
+<span class="Folded">+--  2 lines: main()----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+</tr>
+</table>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
+
