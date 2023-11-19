@@ -19,6 +19,9 @@ fpsClock = pygame.time.Clock()
 WINDOW_WIDTH = 400
 WINDOW_HEIGHT = 600
 
+# The maximum angle the ball can bounce off the paddle at
+MAX_ANGLE = math.radians(50)
+
 SCREEN_MIDDLE = [WINDOW_WIDTH / 2.0, WINDOW_HEIGHT / 2.0]
 
 PADDLE_TO_SCREEN_DISTANCE = 20 # Distance from the edge of the paddles to the closest vertical edge of the screen
@@ -33,8 +36,10 @@ pygame.display.set_caption('My Game!')
 
 font = pygame.font.SysFont(pygame.font.get_default_font(), 32)
 
-def draw_text(text: str, color, center):
-    text = font.render(text, True, color)
+titleFont = pygame.font.SysFont(pygame.font.get_default_font(), 64)
+
+def draw_text(text: str, color, center, useFont = font):
+    text = useFont.render(text, True, color)
 
     WINDOW.blit(text, [center[0] - text.get_width() / 2, center[1] - text.get_height() / 2])
 
@@ -163,33 +168,18 @@ def ball_paddle_collision(ball: Ball, paddle: Paddle, which):
 def clamp(value, lower, upper):
     return lower if value < lower else upper if value > upper else value
 
-def run_game():
+def run_menu():
+    draw_text("PONG", (0, 0, 0), SCREEN_MIDDLE, titleFont)
+
+    BUTTON_WIDTH = 100
+    BUTTON_HEIGHT = 50
+    BUTTON_BOTTOM_OFF = 100
+
+    pygame.draw.rect(WINDOW, (255, 0, 255), (SCREEN_MIDDLE[0] - BUTTON_WIDTH / 2, SCREEN_MIDDLE[1] + BUTTON_BOTTOM_OFF,
+    BUTTON_WIDTH, BUTTON_HEIGHT),border_radius=10)
     pass
-    
 
-# The main function that controls the game
-def main () :
-  paddleBottom = Paddle([100, WINDOW_HEIGHT - PADDLE_TO_SCREEN_DISTANCE - 15], [100, 15], [255, 0, 0], 10, K_a, K_d)
-  paddleTop = Paddle([100, PADDLE_TO_SCREEN_DISTANCE], [100, 15], [0, 0, 255], 10, K_LEFT, K_RIGHT)
-
-  ball = Ball([100, 100], 10, [255, 0, 0], [2.5, 3])
-
-  # The maximum angle the ball can bounce off the paddle at
-  MAX_ANGLE = math.radians(50)
-
-  # The main game loop
-  while True:
-    # Get inputs
-    for event in pygame.event.get() :
-      if event.type == QUIT :
-        pygame.quit()
-        sys.exit()
-    
- 
-    # Render (Draw) elements of the game
-    WINDOW.fill(BACKGROUND)
-
-
+def run_game(paddleBottom, paddleTop, ball):
     paddleBottom.update()
     paddleBottom.draw()
 
@@ -249,6 +239,33 @@ def main () :
 
         ball.velocity = [new_ball_speed * math.sin(MAX_ANGLE * x_percentage), new_ball_speed * math.cos(MAX_ANGLE * x_percentage)]
 
+    pass
+    
+
+# The main function that controls the game
+def main () :
+  paddleBottom = Paddle([100, WINDOW_HEIGHT - PADDLE_TO_SCREEN_DISTANCE - 15], [100, 15], [255, 0, 0], 10, K_a, K_d)
+  paddleTop = Paddle([100, PADDLE_TO_SCREEN_DISTANCE], [100, 15], [0, 0, 255], 10, K_LEFT, K_RIGHT)
+
+  ball = Ball([100, 100], 10, [255, 0, 0], [2.5, 3])
+
+
+  # The main game loop
+  while True:
+    # Get inputs
+    for event in pygame.event.get() :
+      if event.type == QUIT :
+        pygame.quit()
+        sys.exit()
+    
+ 
+    # Render (Draw) elements of the game
+    WINDOW.fill(BACKGROUND)
+
+    if gameState == GAME_STATE_PLAY:
+        run_game(paddleBottom, paddleTop, ball)
+    elif gameState == GAME_STATE_MENU:
+        run_menu()
 
     # Update the display!
     pygame.display.update()
