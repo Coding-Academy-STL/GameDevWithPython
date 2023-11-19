@@ -1,6 +1,4 @@
-import array
-from enum import Enum
-import pygame, sys, random, os
+import pygame, sys
 import math
 from pygame.locals import *
 
@@ -8,12 +6,18 @@ pygame.init()
  
 # Background color (R, G, B)
 BACKGROUND = (255, 255, 255)
+
+GAME_STATE_MENU = 0
+GAME_STATE_PLAY = 1
+GAME_STATE_END  = 2
+
+gameState = GAME_STATE_MENU
  
 # Game Setup
 FPS = 60
 fpsClock = pygame.time.Clock()
-WINDOW_WIDTH = 100
-WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 400
+WINDOW_HEIGHT = 600
 
 SCREEN_MIDDLE = [WINDOW_WIDTH / 2.0, WINDOW_HEIGHT / 2.0]
 
@@ -158,6 +162,9 @@ def ball_paddle_collision(ball: Ball, paddle: Paddle, which):
 # If x is, say, 0.2, it will remain 0.2 as it is within the range
 def clamp(value, lower, upper):
     return lower if value < lower else upper if value > upper else value
+
+def run_game():
+    pass
     
 
 # The main function that controls the game
