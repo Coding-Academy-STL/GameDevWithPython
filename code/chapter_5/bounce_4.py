@@ -199,26 +199,45 @@ def clamp(value, lower, upper):
 
 
 def run_menu():
+    global gameState
     draw_text("PONG", (0, 0, 0), SCREEN_MIDDLE, titleFont)
 
     BUTTON_WIDTH = 100
     BUTTON_HEIGHT = 50
-    BUTTON_BOTTOM_OFF = 50
+    BUTTON_BOTTOM_OFF = 100
 
-    pygame.draw.rect(
-        WINDOW,
-        (255, 0, 255),
-        (
-            SCREEN_MIDDLE[0] - BUTTON_WIDTH / 2,
-            SCREEN_MIDDLE[1] + BUTTON_BOTTOM_OFF,
-            BUTTON_WIDTH,
-            BUTTON_HEIGHT,
-        ),
-        border_radius=10,
+    button_rect = pygame.Rect(
+        SCREEN_MIDDLE[0] - BUTTON_WIDTH / 2,
+        SCREEN_MIDDLE[1] + BUTTON_BOTTOM_OFF - BUTTON_HEIGHT / 2,
+        BUTTON_WIDTH,
+        BUTTON_HEIGHT,
     )
 
-    pass
+    pygame.draw.rect(WINDOW, (255, 0, 255), button_rect, border_radius=10)
 
+    draw_text(
+        "play",
+        (
+            0,
+            0,
+            0,
+        ),
+        (SCREEN_MIDDLE[0], SCREEN_MIDDLE[1] + BUTTON_BOTTOM_OFF),
+    )
+
+    # check if the user clicks the button
+    if pygame.mouse.get_pressed()[0] and button_rect.collidepoint(
+        pygame.mouse.get_pos()
+    ):
+        gameState = GAME_STATE_PLAY
+
+LEFT = 0
+RIGHT = 1
+def move_for_me(paddle: Paddle, ball: Ball):
+    if ball.pos[0] < paddle.pos[0]:
+        return LEFT
+    else:
+        return RIGHT
 
 def run_game(paddleBottom, paddleTop, ball):
     paddleBottom.update()
@@ -319,7 +338,7 @@ def main():
         [100, PADDLE_TO_SCREEN_DISTANCE], [100, 15], [0, 0, 255], 10, K_LEFT, K_RIGHT
     )
 
-    ball = Ball([100, 100], 10, [255, 0, 0], [2.5, 3])
+    ball = Ball([100, 100], 10, [255, 0, 0], [2.5, 10])
 
     # The main game loop
     while True:
