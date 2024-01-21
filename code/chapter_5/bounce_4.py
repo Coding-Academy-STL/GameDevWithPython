@@ -75,10 +75,12 @@ class Paddle:
             rightKey  # The key you want to make the paddle go right (eg K_d)
         )
 
-    def update(self):
-        if pygame.key.get_pressed()[self.leftKey]:
+    def update(self, ai=False, overrideLeft=False, overrideRight=False):
+        if (ai and overrideLeft) or (not ai and pygame.key.get_pressed()[self.leftKey]):
             self.pos[0] -= self.speed
-        if pygame.key.get_pressed()[self.rightKey]:
+        if (ai and overrideRight) or (
+            not ai and pygame.key.get_pressed()[self.rightKey]
+        ):
             self.pos[0] += self.speed
 
         if self.pos[0] < 0:
@@ -231,19 +233,26 @@ def run_menu():
     ):
         gameState = GAME_STATE_PLAY
 
+
 LEFT = 0
 RIGHT = 1
+
+
 def move_for_me(paddle: Paddle, ball: Ball):
     if ball.pos[0] < paddle.pos[0]:
         return LEFT
     else:
         return RIGHT
 
+
 def run_game(paddleBottom, paddleTop, ball):
     paddleBottom.update()
     paddleBottom.draw()
 
-    paddleTop.update()
+    topMove = move_for_me(paddleTop, ball)
+    topMoveLeft = topMove == LEFT
+    topMoveRight = topMove == RIGHT
+    paddleTop.update(overrideRight=topMoveRight, overrideLeft=topMoveLeft, ai=True)
     paddleTop.draw()
 
     ball.update()
